@@ -16,25 +16,28 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then(res => this.setState({ todos: res.data }));
+      .get('http://react.talitmahmood.com/--backend/public/api/todos')
+      .then(res => this.setState({ todos: res.data['data'] }));
+      //.then(res => console.log(res.data));
   }
 
   // Toggle Complete
   markComplete = id => {
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      })
-    });
+    axios
+      .put(`http://react.talitmahmood.com/--backend/public/api/todo/toggle/${id}`)
+      .then(res => this.setState({
+        todos: this.state.todos.map(todo => {
+          if (todo.id === id) {
+            todo.completed = !todo.completed;
+          }
+          return todo;
+        })
+      }));
   };
 
   // Delete Todo
   delTodo = id => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
+    axios.delete(`http://react.talitmahmood.com/--backend/public/api/todo/${id}`).then(res =>
       this.setState({
         todos: [...this.state.todos.filter(todo => todo.id !== id)]
       })
@@ -44,12 +47,12 @@ class App extends Component {
   // Add Todo
   addTodo = title => {
     axios
-      .post('https://jsonplaceholder.typicode.com/todos', {
+      .post('http://react.talitmahmood.com/--backend/public/api/todo', {
         title,
-        completed: false
+        completed: 0
       })
       .then(res => {
-        res.data.id = uuid.v4();
+        //res.data.id = uuid.v4();
         this.setState({ todos: [...this.state.todos, res.data] });
       });
   };

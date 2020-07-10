@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get('http://react.talitmahmood.com/--backend/public/api/todos')
+      .get('http://todosbackend.talitmahmood.com/public/api/todos')
       .then(res => this.setState({ todos: res.data['data'] }));
       //.then(res => console.log(res.data));
   }
@@ -23,7 +23,7 @@ class App extends Component {
   // Toggle Complete
   markComplete = id => {
     axios
-      .put(`http://react.talitmahmood.com/--backend/public/api/todo/toggle/${id}`)
+      .put(`http://todosbackend.talitmahmood.com/public/api/todo/toggle/${id}`)
       .then(res => this.setState({
         todos: this.state.todos.map(todo => {
           if (todo.id === id) {
@@ -36,7 +36,7 @@ class App extends Component {
 
   // Delete Todo
   delTodo = id => {
-    axios.delete(`http://react.talitmahmood.com/--backend/public/api/todo/${id}`).then(res =>
+    axios.delete(`http://todosbackend.talitmahmood.com/public/api/todo/${id}`).then(res =>
       this.setState({
         todos: [...this.state.todos.filter(todo => todo.id !== id)]
       })
@@ -46,7 +46,7 @@ class App extends Component {
   // Add Todo
   addTodo = title => {
     axios
-      .post('http://react.talitmahmood.com/--backend/public/api/todo', {
+      .post('http://todosbackend.talitmahmood.com/public/api/todo', {
         title,
         completed: 0
       })

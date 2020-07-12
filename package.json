@@ -2,7 +2,7 @@
   "name": "todos-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://todos.talitmahmood.com",
+  "homepage": "https://todos.talitmahmood.com",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
